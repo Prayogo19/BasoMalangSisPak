@@ -1,189 +1,126 @@
-<?php
-session_start();
-//cek apakah user sudah login
-if(!isset($_SESSION['username'])){
-    die("Anda belum login");//jika belum login jangan lanjut
-}
-//cek level user
-if($_SESSION['level']!="admin"){
-    die("Anda bukan admin");//jika bukan admin jangan lanjut
-}
-?>
-
+<?php 
+	session_start()
+ ?>
 <!DOCTYPE html>
-
-<html lang="en">
-
-
-
+<html>
 <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="description" content="Landing PAGE Html5 Template">
-
-    <meta name="keywords" content="landing,startup,flat">
-
-    <meta name="author" content="Made By GN DESIGNS">
-
-
-
-    <title>Dokter Page</title>
-
-
-
-    <!-- // PLUGINS (css files) // -->
-
-    <link href="../assets/js/plugins/bootsnav_files/skins/color.css" rel="stylesheet">
-
-    <link href="../assets/js/plugins/bootsnav_files/css/animate.css" rel="stylesheet">
-
-    <link href="../assets/js/plugins/bootsnav_files/css/bootsnav.css" rel="stylesheet">
-
-    <link href="../assets/js/plugins/bootsnav_files/css/overwrite.css" rel="stylesheet">
-
-    <link href="../assets/js/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
-
-    <link href="../assets/js/plugins/owl-carousel/owl.theme.css" rel="stylesheet">
-
-    <link href="../assets/js/plugins/owl-carousel/owl.transitions.css" rel="stylesheet">
-
-    <link href="../assets/js/plugins/Magnific-Popup-master/Magnific-Popup-master/dist/magnific-popup.css" rel="stylesheet">
-
-    <!--// FAVICON //-->
-
-    <link href="../favicon.ico" rel="shortcut icon">
-
-    <!--// ICONS //-->
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!--// BOOTSTRAP & Main //-->
-
-    <link href="../assets/bootstrap-3.3.7/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="../assets/css/admin.css" rel="stylesheet">
-
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Dokter - Dashboard</title>
+	<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../assets/css/datepicker3.css" rel="stylesheet">
+	<link href="../assets/css/styles.css" rel="stylesheet">
+	
+	<link href="../favicon.ico" rel="shortcut icon">
+	
+	<!--Custom Font-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
 </head>
-
-
-
 <body>
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span></button>
+				<a class="navbar-brand" href="#"><span>SIPARTUS &nbsp;</span>Sistem Pakar Pendeteksi Ancaman Abortus</a>
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<div class="profile-sidebar">
+			<div class="profile-userpic">
+				<img src="../assets/img/profile.png" class="img-responsive" alt="">
+			</div>
+			<div class="profile-usertitle">
+				<div class="profile-usertitle-name">Username</div>
+				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="divider"></div>
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li><a href="dashboard.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li><a href="datauser.php"><em class="fa fa-user">&nbsp;</em> Data User</a></li>
+			<li class="active"><a href="gejala.php"><em class="fa fa-eye">&nbsp;</em> Gejala</a></li>
+			<li><a href="penyakit.php"><em class="fa fa-bug">&nbsp;</em> Penyakit</a></li>
+			<li><a href="../logout.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+		</ul>
+	</div><!--/.sidebar-->
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<em class="fa fa-home"></em>
+				</a></li>
+				<li class="active">Gejala</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Gejala</h1>
+			</div>
+		</div><!--/.row-->
+		
+		 <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Kode Gejala</th>
+                        <th scope="col">Nama Gejala</th>
+                        <th><a href="tambahgejala.php"><button class="btn btn-success">Tambah</button></a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            require_once "../koneksi.php";
 
-
-
-
-    <!--======================================== 
-
-           Header
-
-    ========================================-->
-
-
-
-    <!--//** Navigation**//-->
-    <?php
-        include '../menu.php';
-    ?>
-
-    <!--//** Banner**//-->
-
-    <section id="home">
-
-        <div class="container">
-
-            <div class="row">
-
-                <!-- Introduction -->
-
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Kode Gejala</td>
-                            <td>Nama Gejala</td>
-                            <td>Aksi</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                        include('../koneksi.php');
-                        $sql = mysqli_query($koneksi,"SELECT * FROM gejala");
-                        while($row = $sql->fetch_assoc()) {
-                    ?>
-                        <tr>
-                            <td><?php echo $row["kd_gejala"];?></td>
-                            <td><?php echo $row["nama_gejala"];?></td>
-                            <td><a href="update_gejala.php"><button class="btn btn-sm btn-info">Ubah</button></a></td>
-                        </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!--======================================== 
-
-           Footer
-
-    ========================================-->
-
-
-
-    <footer>
-
-        <div class="container">
-
-            <div class="row">
-
-                <div class="footer-caption">
-
-                    <img src="../assets/img/logo.png" class="img-responsive center-block" alt="logo">
-
-                    <hr>
-
-                    <h5 class="pull-left">Basomalang, &copy;2019 All rights reserved</h5>
+                            $result = mysqli_query($koneksi, "SELECT*  FROM gejala") or die(mysqli_error($koneksi));
+                            while ($baris = mysqli_fetch_array($result)) { ?>
+                            <tr>
+                                <td><?php echo $baris['kd_gejala'] ?></td>
+                                <td><?php echo $baris['nama_gejala'] ?></td>
+                                <td><a href="updategejala.php?kd_gejala=<?php echo $baris['kd_gejala'];?>"><button class="btn btn-info">Ubah</button></a>&emsp;&emsp;<a href="hapusgejala.php?kd_gejala=<?php echo $baris['kd_gejala'];?>"><button class="btn btn-danger">Hapus</button></a></td>
+                            </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-
-    <script src="../assets/bootstrap-3.3.7/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-
-    <script src="../assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
-
-    <script src="../assets/js/plugins/bootsnav_files/js/bootsnav.js"></script>
-
-    <script src="../assets/js/plugins/typed.js-master/typed.js-master/dist/typed.min.js"></script>
-
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-
-    <script src="../assets/js/plugins/Magnific-Popup-master/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
-
-    <script src="../assets/js/main.js"></script>
-
+	
+	<script src="../assets/js/jquery-1.11.1.min.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/chart.min.js"></script>
+	<script src="../assets/js/chart-data.js"></script>
+	<script src="../assets/js/easypiechart.js"></script>
+	<script src="../assets/js/easypiechart-data.js"></script>
+	<script src="../assets/js/bootstrap-datepicker.js"></script>
+	<script src="../assets/js/custom.js"></script>
+	<script>
+		window.onload = function () {
+	var chart1 = document.getElementById("line-chart").getContext("2d");
+	window.myLine = new Chart(chart1).Line(lineChartData, {
+	responsive: true,
+	scaleLineColor: "rgba(0,0,0,.2)",
+	scaleGridLineColor: "rgba(0,0,0,.05)",
+	scaleFontColor: "#c5c7cc"
+	});
+};
+	</script>
+		
 </body>
-
-
-
 </html>
